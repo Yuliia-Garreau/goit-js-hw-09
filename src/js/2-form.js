@@ -42,11 +42,11 @@ if (savedFormData) {
 // очисти локальне сховище, об’єкт formData і поля форми.
 
 document
-  .querySelector('feedback-form')
+  .querySelector('.feedback-form')
   .addEventListener('submit', handleSubmit);
 function handleSubmit(event) {
   event.preventDefault();
-  if (formData.email === '' || formData.message === '') {
+  if (formData.email.trim() === '' || formData.message.trim() === '') {
     alert('Fill please all fields');
   } else {
     console.log(formData);
