@@ -4,8 +4,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 console.log(SimpleLightbox);
 
-// "use strict";
-
 const images = [
   {
     preview:
@@ -73,26 +71,46 @@ const images = [
 ];
 
 const list = document.querySelector('.gallery');
-images.forEach(image => {
-  const listItem = document.createElement('li');
-  listItem.classList.add('gallery-item');
-  list.append(listItem);
+function createMarkup(images) {
+  return images
+    .map(
+      item => `
+            <li class="gallery-item">
+              <a class="gallery-link" href=${item.original}>
+                <img
+                  class="gallery-image"
+                  src="${item.preview}"
+                  alt="${item.description}"
+                />
+              </a>
+            </li>`
+    )
+    .join('');
+}
+list.insertAdjacentHTML('beforeend', createMarkup(images));
 
-  const link = document.createElement('a');
-  link.classList.add('gallery-link');
-  link.href = image.original;
-  listItem.append(link);
+// images.forEach(image => {
+//   const listItem = document.createElement('li');
+//   listItem.classList.add('gallery-item');
+//   list.append(listItem);
 
-  const img = document.createElement('img');
-  img.classList.add('gallery-image');
-  img.src = image.preview;
-  img.alt = image.description;
-  link.append(img);
-});
-let lightbox = new SimpleLightbox('.gallery a', {
+//   const link = document.createElement('a');
+//   link.classList.add('gallery-link');
+//   link.href = image.original;
+//   listItem.append(link);
+
+//   const img = document.createElement('img');
+//   img.classList.add('gallery-image');
+//   img.src = image.preview;
+//   img.alt = image.description;
+//   link.append(img);
+// });
+
+// let lightbox =
+new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
   className: 'bg-color',
 });
 
-lightbox.on('show.simplelightbox');
+// lightbox.on('show.simplelightbox');
